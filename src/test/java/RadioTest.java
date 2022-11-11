@@ -52,6 +52,94 @@ public class RadioTest {
         assertEquals(expected, actual);
     }
 
+    /* Установка значения за пределами максимального при запуске метода "Next" */
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationInRangeWithoutMethodMax() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(14);
+
+
+        int actual = 14;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationInRangeWithoutMethodMin() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(0);
+
+
+        int actual = 0;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationInRangeWithoutMethodInRange() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(8);
+
+
+        int actual = 8;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    /* Установка максимального значения при запуске метода "Next" c указанием размера */
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationMaxSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(14);
+
+        switcher.next();
+
+        int actual = 0;
+        int expected = switcher.getCurrentRadioStation();
+
+
+        assertEquals(expected, actual);
+    }
+
+    /* Установка минимального значения при запуске метода "Next" c указанием размера */
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationMinSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(0);
+
+        switcher.next();
+
+        int actual = 1;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationInRangeSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(11);
+
+        switcher.next();
+
+        int actual = 12;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
     /* Установка максимального значения при запуске метода "Prev" */
 
     @Test
@@ -100,17 +188,65 @@ public class RadioTest {
         assertEquals(expected, actual);
     }
 
+    /* Установка максимального значения при запуске метода "Prev" c указанием размера */
+
+    @Test
+    public void shouldSetPrevNumberOfCurrentRadioStationMaxSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(14);
+
+        switcher.prev();
+
+        int actual = 13;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    /* Установка минимального значения при запуске метода "Prev" c указанием размера */
+
+    @Test
+    public void shouldSetPrevNumberOfCurrentRadioStationMinSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(0);
+
+        switcher.prev();
+
+        int actual = 14;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    /* Установка значений в пределах диапазона при запуске метода "Prev" c указанием размера */
+
+    @Test
+    public void shouldSetPrevNumberOfCurrentRadioStationOverInRangeSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(12);
+
+        switcher.prev();
+
+        int actual = 11;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
     /* Установка максимального значения звука при переключении на один */
 
     @Test
     public void shouldIncreaseVolumeOnOneMax() {
 
         Radio switcher = new Radio();
-        switcher.setCurrentVolume(10);
+        switcher.setCurrentVolume(100);
 
         switcher.increaseVolume();
 
-        int actual = 10;
+        int actual = 100;
         int expected = switcher.getCurrentVolume();
 
         assertEquals(expected, actual);
@@ -154,11 +290,11 @@ public class RadioTest {
     public void shouldDecreaseVolumeOnOneMax() {
 
         Radio switcher = new Radio();
-        switcher.setCurrentVolume(10);
+        switcher.setCurrentVolume(100);
 
         switcher.decreaseVolume();
 
-        int actual = 9;
+        int actual = 99;
         int expected = switcher.getCurrentVolume();
 
         assertEquals(expected, actual);
@@ -205,6 +341,20 @@ public class RadioTest {
 
         Radio switcher = new Radio();
         switcher.setRadioStation(10);
+
+        switcher.next();
+
+        int actual = 1;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationOverMaxMax() {
+
+        Radio switcher = new Radio();
+        switcher.setRadioStation(11);
 
         switcher.next();
 
@@ -270,7 +420,7 @@ public class RadioTest {
 
         switcher.increaseVolume();
 
-        int actual = 1;
+        int actual = 12;
         int expected = switcher.getCurrentVolume();
 
         assertEquals(expected, actual);
@@ -298,7 +448,7 @@ public class RadioTest {
     public void shouldDecreaseVolumeOnOneOverMax() {
 
         Radio switcher = new Radio();
-        switcher.setCurrentVolume(11);
+        switcher.setCurrentVolume(101);
 
         switcher.decreaseVolume();
 
@@ -320,6 +470,84 @@ public class RadioTest {
 
         int actual = 0;
         int expected = switcher.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    /* Установка значения за пределами максимального при запуске метода "Next" c указанием размера */
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationOverMaxSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(15);
+
+        switcher.next();
+
+        int actual = 1;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationOverMaxMaxSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(16);
+
+        switcher.next();
+
+        int actual = 1;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    /* Установка значения за пределами минимального при запуске метода "Next" c указанием размера */
+
+    @Test
+    public void shouldSetNextNumberOfCurrentRadioStationOverMinSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(-1);
+
+        switcher.next();
+
+        int actual = 1;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    /* Установка значения за пределами максимального при запуске метода "Prev" c указанием размера */
+
+    @Test
+    public void shouldSetPrevNumberOfCurrentRadioStationOverMaxSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(15);
+
+        switcher.prev();
+
+        int actual = 14;
+        int expected = switcher.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    /* Установка значения за пределами минимального при запуске метода "Prev" c указанием размера */
+
+    @Test
+    public void shouldSetPrevNumberOfCurrentRadioStationOverMinSize() {
+
+        Radio switcher = new Radio(15);
+        switcher.setRadioStation(-1);
+
+        switcher.prev();
+
+        int actual = 14;
+        int expected = switcher.getCurrentRadioStation();
 
         assertEquals(expected, actual);
     }
